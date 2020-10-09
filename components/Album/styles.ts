@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
 
 
     container:{
-        backgroundColor:'#fff',
+       /*  backgroundColor:'#fff', */
         width:155,
         margin:10,
         height: 200,
@@ -19,8 +19,9 @@ const styles = StyleSheet.create({
     },
     text:{
 
-        color:'grey',
-        marginTop:10
+        color:'#fff',
+        marginTop:10,
+        fontSize:16
 
     }
 

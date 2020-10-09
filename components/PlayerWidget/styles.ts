@@ -24,7 +24,9 @@ const styles = StyleSheet.create({
         },
         nameContainer:{
             flexDirection:'row',
-            alignItems:'center'
+            alignItems:'center',
+            justifyContent:'flex-start'
+
         }
         ,
         iconsContainer:{
