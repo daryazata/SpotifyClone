@@ -1,8 +1,8 @@
 export default  {
       
     id:'1',
-    name:'Good viibes',
-    by:'spotify',
+    name:'Good vibes',
+    by:'Spotify',
     numberOfLikes:'32',
 
     imageUri:'https://4.bp.blogspot.com/-VbPJr-DMwWs/UlDBOsp8zsI/AAAAAAAADE0/opb0TILGGdI/s1600/91+vqXiXlkL._SL1500_.jpg',

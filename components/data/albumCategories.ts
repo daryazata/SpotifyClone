@@ -59,7 +59,7 @@ export default [{
       {
       
         id:'3',
-        imageUri:'http://3.bp.blogspot.com/-uMxF7TYGjLU/UKIB47H4y5I/AAAAAAAABgk/wzmznwapWmY/s1600/cover.jpg',
+        imageUri:'https://img.rnudah.com/images/08/086818032273629.jpg',
         artistHeadline :'Coldplay Live 2012'
       },
   

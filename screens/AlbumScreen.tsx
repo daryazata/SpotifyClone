@@ -1,8 +1,9 @@
 import  React ,{useEffect} from 'react';
-import {View, Text, StyleSheet} from 'react-native'
+import {View, Text, StyleSheet, FlatList} from 'react-native'
 import { useRoute } from '@react-navigation/core';
 import albumDetails from '../components/data/albumDetails'
 import SongListItem from '../components/SongListItem'
+import AlbumHeader from '../components/AlbumHeader';
 
 
 const AlbumScreen =()=>{
@@ -16,9 +17,15 @@ const AlbumScreen =()=>{
     return (
 
         <View style={styles.container}>
-
+  
+       <FlatList 
+       data={albumDetails.songs}
+       renderItem ={({item} ) => <SongListItem song ={item}/>}
+        keyExtractor={(item)=> item.id}
+        ListHeaderComponent ={()=> <AlbumHeader album={albumDetails}/>}
        
-            <SongListItem song={albumDetails.songs[0]}/>
+       />
+ 
         </View>
 
     )
@@ -30,7 +37,7 @@ export default AlbumScreen
 
 const styles = StyleSheet.create({
     container: {
-      backgroundColor:'orange',
+      backgroundColor:'black',
 /*       flex: 1,
       alignItems: 'center',
       justifyContent: 'center', */
