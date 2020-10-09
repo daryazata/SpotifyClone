@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
             bottom:49,
             backgroundColor:'black',
             width:'100%',
-            flexDirection:'row', 
+         /*    flexDirection:'row',  */
             borderWidth:1,
             borderColor:'black'
        
@@ -55,6 +55,17 @@ const styles = StyleSheet.create({
             color:'#fff',
             fontSize:18,
 
+
+        },
+        progress:{
+            height:4,
+        
+ /*            backgroundColor:'#bcbcbc' */
+        backgroundColor:'orange'
+        },
+        row:{
+
+            flexDirection:'row', 
 
         }
 })
