@@ -19,14 +19,14 @@ const styles = StyleSheet.create({
         rightContainer:{
             flex:1,
             flexDirection:'row',
-            justifyContent:'space-between'
-
+            justifyContent:'space-between',
+            
         },
         nameContainer:{
             flexDirection:'row',
             alignItems:'center',
-            justifyContent:'flex-start'
-
+            justifyContent:'flex-start',
+            maxWidth:'30%'
         }
         ,
         iconsContainer:{

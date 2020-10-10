@@ -1,28 +1,55 @@
-import  React ,{useEffect} from 'react';
+import  React ,{useEffect, useState} from 'react';
 import {View, Text, StyleSheet, FlatList} from 'react-native'
 import { useRoute } from '@react-navigation/core';
 import albumDetails from '../components/data/albumDetails'
 import SongListItem from '../components/SongListItem'
 import AlbumHeader from '../components/AlbumHeader';
+import {API, graphqlOperation} from 'aws-amplify'
+import {getAlbum} from '../src/graphql/queries'
+
 
 
 const AlbumScreen =()=>{
+
+    const [songs, setSongs] = useState([])
+    const [album, setAlbum]  = useState([])
 
     const route = useRoute()
 
     useEffect(() => {
         
-      console.log(route)
+        const fetchAlbumDeatils = async ()=>{
+
+            try{
+    
+                const data = await API.graphql(graphqlOperation(getAlbum,{id:route.params.id}))
+                console.log('ONE ALBUM',data.data.getAlbum)
+                setSongs(data.data.getAlbum.songs.items)
+                setAlbum(data.data.getAlbum)
+            }catch(e){
+    
+                console.log(e)
+            }
+
+        }
+
+        fetchAlbumDeatils()
+
+
+
     }, [])
+
+    /* display one category with all albums */
+    /* GetAlbumCategory */
     return (
 
         <View style={styles.container}>
   
        <FlatList 
-       data={albumDetails.songs}
+       data={songs}
        renderItem ={({item} ) => <SongListItem song ={item}/>}
         keyExtractor={(item)=> item.id}
-        ListHeaderComponent ={()=> <AlbumHeader album={albumDetails}/>}
+        ListHeaderComponent ={()=> <AlbumHeader album={album}/>}
        
        />
  

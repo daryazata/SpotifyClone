@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import {Text, Image, View} from 'react-native'
 import {AntDesign, FontAwesome} from "@expo/vector-icons"
 import { Entypo } from '@expo/vector-icons';
@@ -7,10 +7,12 @@ import {Audio } from 'expo-av'
 import {Song} from '../../types'
 import { Sound } from 'expo-av/build/Audio';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import {AppContext }from '../../AppContext'
+import {API, graphqlOperation} from 'aws-amplify'
+import {getSong} from '../../src/graphql/queries'
+import { isGenericTypeAnnotation } from '@babel/types';
 
-
-
-const song ={ 
+const song1 ={ 
     id:"1",
     uri:'https://not-just-trash.s3-eu-west-1.amazonaws.com/WhatsApp+Audio+2020-09-22+at+14.20.25.mp4',
     imageUri:"https://images.genius.com/0d81bc56d6111dec7ae23086388d0ee6.960x960x1.jpg",
@@ -21,12 +23,39 @@ const song ={
 
 export default function PlayerWidget() {
 
-
+    const [song, setSong] =useState(null) 
     const [sound, setSound] = useState<Sound|null>(null)
     const [ isPlaying, setIsPlaying] = useState<boolean>(true)
     const [duration, setDuration]= useState<number|null>(null)
     const [position, setPosition] = useState<number|null>(null)
 
+    const { songId} = useContext(AppContext)
+
+
+    useEffect(() => {
+        
+        const fetchAlbumDeatils = async ()=>{
+
+            try{
+    
+                const data = await API.graphql(graphqlOperation(getSong,{id:songId}))
+                console.log('SONG',data.data.getSong)
+                const newSong=data.data.getSong
+               setSong(newSong)
+               /*  setSongs(data.data.getAlbum.songs.items)
+                setAlbum(data.data.getAlbum) */
+            }catch(e){
+    
+                console.log(e)
+            }
+
+        }
+
+        fetchAlbumDeatils()
+
+    }, [songId])
+
+    
     const onPlaybackStatusUpdate= (status) =>{ // now does this status come in here?
        
         setIsPlaying(status.isPlaying)
@@ -41,6 +70,7 @@ export default function PlayerWidget() {
         }
         return (position/duration)*100
     }
+
 
     const playCurrentSong = async (status)=>{
         if(sound){
@@ -57,9 +87,12 @@ export default function PlayerWidget() {
     }
 
     useEffect(()=>{
-        /* play the song */
-        playCurrentSong()
-    }, [])
+       
+        if(song){
+
+            playCurrentSong()
+        }
+    }, [song])
     
 
     async function onPlayPausePress(){
@@ -75,6 +108,11 @@ export default function PlayerWidget() {
             await sound.playAsync()
         }
     }
+
+   if(!song){
+       return null
+
+   }
 
     return (
         <View style={styles.container}>

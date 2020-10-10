@@ -19,16 +19,16 @@ const AlbumComponent = (props: AlbumProps)=> {
     const onPress =()=>{
     
         navigation.navigate('AlbumScreen' ,{id: props.album.id})
-       // console.warn(`Album pressed: ${props.album.artistHeadline}`)
+  
     }
 
     return (
         <TouchableWithoutFeedback onPress={onPress}>
-        <View style={styles.container}>
+            <View style={styles.container}>
 
-            <Image source={ {uri: props.album.imageUri}} style={styles.image}/>
-            <Text style={styles.text} >{props.album.artistHeadline}</Text>
-        </View>
+                <Image source={ {uri: props.album.imageUri}} style={styles.image}/>
+                <Text style={styles.text} >{props.album.artistHeadline}</Text>
+            </View>
         </TouchableWithoutFeedback>
     )
 }
