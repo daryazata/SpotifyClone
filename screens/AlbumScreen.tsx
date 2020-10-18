@@ -35,8 +35,6 @@ const AlbumScreen =()=>{
 
         fetchAlbumDeatils()
 
-
-
     }, [])
 
     /* display one category with all albums */
